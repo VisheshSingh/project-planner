@@ -1,5 +1,5 @@
 <template>
-  <div class="project">
+  <div class="project" :class="{ complete: project.complete }">
     <div class="actions">
       <h3 @click="toggleDetails">{{ project.title }}</h3>
       <div class="icons">
@@ -9,7 +9,7 @@
         <span @click="deleteProject" class="material-icons">
           delete
         </span>
-        <span class="material-icons">
+        <span @click="toggleDone" class="material-icons tick">
           done
         </span>
       </div>
@@ -39,6 +39,15 @@ export default {
         .then(() => this.$emit('delete', this.project.id))
         .catch((err) => console.log(err.message));
     },
+    toggleDone() {
+      fetch(this.uri, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ complete: !this.project.complete }),
+      })
+        .then(() => this.$emit('complete', this.project.id))
+        .catch((err) => console.log(err.message));
+    },
   },
 };
 </script>
@@ -51,6 +60,10 @@ export default {
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.05);
   border-left: 4px solid #e90074;
   border-radius: 4px;
+}
+
+.project.complete {
+  border-color: #00ce89;
 }
 
 h3 {
@@ -72,5 +85,9 @@ h3 {
 
 .material-icons:hover {
   color: #777;
+}
+
+.project.complete .tick {
+  color: #00ce89;
 }
 </style>
