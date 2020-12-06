@@ -1,0 +1,16 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "Create a Navbar component",
+      "details": "Lorem Ipsum",
+      "complete": false
+    },
+    {
+      "id": 1,
+      "title": "Setup a marketing email",
+      "details": "Lorem Ipsum",
+      "complete": true
+    }
+  ]
+}
