@@ -6,7 +6,7 @@
         <span class="material-icons">
           edit
         </span>
-        <span class="material-icons">
+        <span @click="deleteProject" class="material-icons">
           delete
         </span>
         <span class="material-icons">
@@ -27,11 +27,17 @@ export default {
   data() {
     return {
       showDetails: false,
+      uri: 'http://localhost:3000/projects/' + this.project.id,
     };
   },
   methods: {
     toggleDetails() {
       this.showDetails = !this.showDetails;
+    },
+    deleteProject() {
+      fetch(this.uri, { method: 'DELETE' })
+        .then(() => this.$emit('delete', this.project.id))
+        .catch((err) => console.log(err.message));
     },
   },
 };
