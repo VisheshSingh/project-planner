@@ -2,15 +2,21 @@
   "projects": [
     {
       "id": 1,
-      "title": "Create a Navbar component",
-      "details": "Lorem Ipsum",
-      "complete": true
+      "title": "Create a Navbar component!!",
+      "details": "Lorem Ipsum!",
+      "complete": false
     },
     {
       "id": 2,
       "title": "Setup a marketing email",
       "details": "Lorem Ipsum",
       "complete": false
+    },
+    {
+      "title": "Design the edit component",
+      "details": "lorem ipsum",
+      "complete": false,
+      "id": 3
     }
   ]
 }

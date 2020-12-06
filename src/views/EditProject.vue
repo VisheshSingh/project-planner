@@ -1,33 +1,48 @@
 <template>
-  <form @submit.prevent="handleSubmit" class="add-project">
+  <form @submit.prevent="handleSubmit" class="edit-project">
+    <h4>Edit Project</h4>
     <label for="title">Title:</label>
     <input type="text" id="title" v-model="title" />
     <label for="details">Details:</label>
     <textarea id="details" v-model="details" />
+    <input type="checkbox" v-model="complete" />
+    <label for="complete" class="completed">Completed</label>
     <div class="submit">
-      <button type="submit">Add Project</button>
+      <button type="submit">Save</button>
     </div>
   </form>
 </template>
 
 <script>
 export default {
-  name: 'AddProject',
+  name: 'EditProject',
+  props: ['id'],
   data() {
     return {
       title: '',
       details: '',
+      complete: null,
     };
+  },
+  mounted() {
+    fetch(`http://localhost:3000/projects/${this.id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        this.title = data.title;
+        this.details = data.details;
+        this.complete = data.complete;
+      })
+      .catch((err) => console.log(err.message));
   },
   methods: {
     handleSubmit() {
       const project = {
         title: this.title,
         details: this.details,
-        complete: false,
+        complete: this.complete,
       };
-      fetch('http://localhost:3000/projects', {
-        method: 'POST',
+      fetch(`http://localhost:3000/projects/${this.id}`, {
+        method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(project),
       })
@@ -44,6 +59,12 @@ form {
   padding: 20px;
   border-radius: 10px;
   margin: 40px auto;
+}
+h4 {
+  color: #aaa;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: normal;
 }
 label {
   display: block;
@@ -65,6 +86,13 @@ textarea {
   border: 1px solid #ddd;
   box-sizing: border-box;
   height: 100px;
+}
+input[type='checkbox'] {
+  display: inline-block;
+  width: 5%;
+}
+label.completed {
+  display: inline-block;
 }
 .submit {
   text-align: center;
