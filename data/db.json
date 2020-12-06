@@ -4,7 +4,7 @@
       "id": 1,
       "title": "Create a Navbar component!!",
       "details": "Lorem Ipsum!",
-      "complete": false
+      "complete": true
     },
     {
       "id": 2,
@@ -15,7 +15,7 @@
     {
       "title": "Design the edit component",
       "details": "lorem ipsum",
-      "complete": false,
+      "complete": true,
       "id": 3
     }
   ]
